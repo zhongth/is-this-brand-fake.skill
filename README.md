@@ -1,6 +1,6 @@
 # 🔍 真假洋牌识别.skill
 
-**真假洋牌验证器** — 一个 AI Agent skill，帮助中国消费者识别假洋牌（pseudo-foreign brands）。
+**真假洋牌验证器** — AI Agent skill，帮助中国消费者识别假洋牌。
 
 ## 功能
 
