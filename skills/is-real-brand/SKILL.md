@@ -287,9 +287,9 @@ After completing all 9 steps:
    - -100 to -60 → 假洋牌（FAKE BRAND）
 3. **Confidence** = abs(raw_score), capped at 99
 
-**Print the verdict to the terminal immediately (in Chinese):**
+**Print the verdict to the terminal immediately (in Chinese), starting with the brand name:**
 ```
-{中文判定} — 可信度 {confidence}%
+{brand_name_en}（{brand_name_cn}）：{中文判定} — 可信度 {confidence}%
 ```
 
 ### Fake Brand Tier Classification (假洋牌段位)
@@ -313,14 +313,23 @@ Include this tier classification in the verdict output and PDF report when appli
 
 ## Generating the PDF Report
 
-After printing the verdict, generate a detailed PDF report:
+After printing the verdict and the investigation summary, **ask the user** if they want to
+download (generate) the detailed PDF report. Do NOT generate the PDF automatically.
+
+Prompt the user with:
+```
+是否需要生成完整 PDF 报告？(y/n)
+```
+
+If the user confirms (answers y, yes, or equivalent):
 
 1. Read `references/report-template.md` for the exact structure
 2. Compile all evidence collected during the 9 steps
 3. Use the `pdf` skill to generate the report
 4. Save as `is-real-brand-{brand-name-slug}-{YYYY-MM-DD}.pdf` in the current working directory
+5. Tell the user:
+   ```
+   Report saved: is-real-brand-{brand-name-slug}-{YYYY-MM-DD}.pdf
+   ```
 
-Tell the user:
-```
-Report saved: is-real-brand-{brand-name-slug}-{YYYY-MM-DD}.pdf
-```
+If the user declines, skip PDF generation entirely.
