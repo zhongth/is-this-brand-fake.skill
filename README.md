@@ -35,10 +35,17 @@
 
 ## 安装
 
-```bash
-# Claude Code 中安装
-claude skill install zhongth/is-this-brand-fake.skill
+在 Claude Code 中运行：
+
 ```
+# 1. 添加 marketplace
+/plugin marketplace add zhongth/is-this-brand-fake.skill
+
+# 2. 安装插件
+/plugin install is-this-brand-fake@zhongth-is-this-brand-fake-skill
+```
+
+或者手动安装：将 `skills/is-real-brand/` 目录复制到你项目的 `.claude/skills/` 下即可。
 
 ## 使用
 

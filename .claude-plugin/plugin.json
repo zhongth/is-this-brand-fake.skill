@@ -1,0 +1,8 @@
+{
+  "name": "is-this-brand-fake",
+  "version": "1.0.0",
+  "description": "识别假洋牌：9步调查验证品牌真实性，输出中文报告 PDF | Detect fake foreign brands targeting Chinese consumers",
+  "author": "zhongth",
+  "homepage": "https://github.com/zhongth/is-this-brand-fake.skill",
+  "license": "MIT"
+}
