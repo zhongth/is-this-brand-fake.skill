@@ -3,7 +3,7 @@ name: is-real-brand
 description: >
   Validate if a brand is a real overseas brand or a fake pseudo-foreign brand (假洋牌).
   Takes a brand name and claimed country of origin, performs 9-step investigation via
-  web-access, and outputs a confidence verdict plus a detailed PDF report.
+  web research, and outputs a confidence verdict plus a detailed PDF report.
 ---
 
 # Is Real Brand - Brand Authenticity Validator
@@ -45,13 +45,31 @@ You are an investigative researcher. Your job is to determine if a brand is genu
 from the country it claims, or if it is a Chinese company masquerading as a foreign brand.
 
 Follow these 9 steps sequentially. For each step:
-1. Use the **web-access** skill to search the relevant databases and websites
+1. Search the relevant databases and websites using whatever web access tools are available
 2. Record what you find (evidence, URLs, key data)
 3. Assign a signal rating: 已验证, 可疑, 未找到, or 危险信号
 4. Assign the numeric score per the scoring rubric
 
-**IMPORTANT:** For all web searches, use the `web-access` skill. This uses the user's
-local browser with existing cookies and authentication.
+### Web Access Strategy
+
+This skill requires internet access to investigate brands. Use whatever browsing/search
+tools are available in your environment, choosing the best one for each task:
+
+**Priority order (use the highest-available option):**
+1. **`web-access` skill** (preferred) — browser-based with CDP, carries login sessions and
+   cookies, best for sites that require auth or have anti-scraping (Xiaohongshu, Zhihu, etc.)
+2. **`playwright` skill** — headless browser automation, good for dynamic pages
+3. **Playwright/Puppeteer MCP servers** — if configured in the environment
+4. **`WebSearch` / `WebFetch` tools** — built-in Claude Code tools, work everywhere including
+   headless Linux servers, good for Google searches and fetching public pages
+5. **`curl` via Bash** — last resort for raw HTML fetching
+
+**Do NOT hardcode a single tool.** Assess what's available at runtime and adapt:
+- On a Mac with Chrome: `web-access` skill is likely available → use it
+- On a headless Linux server: fall back to `WebSearch`/`WebFetch` or Playwright
+- If one tool fails (e.g., site blocks scraping): try an alternative approach
+
+The goal is **getting the information**, not using a specific tool.
 
 ### Reference Files
 

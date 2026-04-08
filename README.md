@@ -68,11 +68,25 @@
 - 原创 9 步验证框架
 - [少数派：识破「假洋」方法论](https://sspai.com/post/57916)
 
+## 联网方式
+
+Skill 会自动选择当前环境中可用的最佳联网工具，无需手动配置：
+
+| 优先级 | 工具 | 适用环境 |
+|-------|------|---------|
+| 1 | `web-access` skill | Mac/桌面端，带 Chrome 登录态，最佳体验 |
+| 2 | `playwright` skill | 需要动态页面渲染的场景 |
+| 3 | Playwright/Puppeteer MCP | 已配置 MCP server 的环境 |
+| 4 | `WebSearch` / `WebFetch` | 所有环境通用（含无头 Linux 服务器） |
+| 5 | `curl` | 兜底方案 |
+
+在 **Linux 服务器**（无桌面环境）上同样可以运行，会自动降级到 WebSearch/WebFetch。
+
 ## 依赖
 
 - [Claude Code](https://claude.ai/claude-code)
-- `web-access` skill（联网调查）
-- `pdf` skill（生成报告）
+- 联网能力（任意一种即可：web-access skill、playwright、WebSearch/WebFetch）
+- `pdf` skill（生成报告，可选）
 
 ## License
 
